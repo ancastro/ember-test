@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<script src="jquery-1.10.2.js"></script>
+		<script src="handlebars-1.1.2.js"></script>
+		<script src="ember-1.2.0.js"></script>
+		<script src="ember-data.js"></script>
+		<script src="app.js"></script>
+		<link href="bootstrap.css" media="screen" rel="stylesheet" />
+		<link href="application.css" media="screen" rel="stylesheet" />
+	</head>
+	<body>
+		<script type='text/x-handlebars' data-template-name="application">
+			<div class='navbar navbar-default'>
+	      <div class='container'>
+	        <a href='#' class='navbar-brand'><img src='images/logo.png' alt='logo' /></a>
+	        <ul class='nav navbar-nav navbar-right'>
+	          {{#link-to 'index' tagName='li'}}Home{{/link-to}}
+	          {{#link-to 'about' tagName='li'}}About{{/link-to}}
+						{{#link-to 'products' tagName="li"}}Products{{/link-to}}
+	        </ul>
+	      </div>
+	    </div>
+			
+			<div class="container">{{outlet}}</div>
+			
+			<footer class="container">
+				<hr />
+	      <p class='pull-left'>&copy; 2013 The Flint &amp; Flame</p>
+	      <p class='pull-right'><a href='#/credits'>Credits</a></p>
+			</footer>
+		</script>
+		
+		<script type="text/x-handlebars" data-template-name="index">
+			<h1>Welcome to the Flint & Flame!</h1>
+			<img {{bind-attr src='logo'}} alt='logo' />
+			<p>there are {{productsCount}} products</p>
+			<p>Rendered on {{time}}</p>
+		</script>
+		
+		<script type="text/x-handlebars" data-template-name="about">
+			<h1>About The Fire Spirits</h1>
+			<p>Seller: {{contactName}}</p>
+			<p>Store {{open}} today</p>
+		</script>
+		<script type="text/x-handlebars" data-template-name="credits">
+			<h1>Programming and Creative Thinking provided by Andrew Castro</h1>
+		</script>
+		<script type="text/x-handlebars" data-template-name="products">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="list-group">
+						{{#each}}
+							{{#link-to 'product' this classNames="list-group-item"}}
+								{{title}}
+							{{/link-to}}
+						{{/each}}
+					</div>
+				</div>
+				<div class="col-sm-9">
+					{{outlet}}
+				</div>
+			</div>
+		</script>
+		<script type="text/x-handlebars" data-template-name="products/index">
+			<p class="text-muted">Choose a product from those on the left</p>
+		</script>
+		<script type="text/x-handlebars" data-template-name="product">
+			<h2>{{title}}</h2>
+			<p>{{description}}</p>
+			<p>{{price}}</p>
+		</script>
+	</body>
+</html>
